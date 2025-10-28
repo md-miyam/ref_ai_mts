@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ref_ai/views/BottomNev/bottom_nev.dart';
-import 'package:ref_ai/views/HomeScreen/home_screen.dart';
+import 'package:get/get.dart';
+import 'package:ref_ai/views/SplashScreen/first_splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +12,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BottomNev(),
+      // home: BottomNev(),
+      home: FirstSplashScreen(),
     );
   }
 }

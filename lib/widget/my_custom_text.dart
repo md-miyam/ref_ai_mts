@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:ref_ai/utils/app_color.dart';
 
-class HomeCustomText extends StatelessWidget {
+class MyCustomText extends StatelessWidget {
   final String text;
   final Color? color;
   final double? fontSize;
   final FontWeight? fontWeight;
+  final TextOverflow? overflow;
+  final TextAlign? textAlign;
 
-  const HomeCustomText({
+  const MyCustomText({
     super.key,
     required this.text,
     this.color,
     this.fontSize,
-    this.fontWeight,
+    this.fontWeight, this.overflow, this.textAlign,
   });
 
   @override
@@ -23,7 +25,9 @@ class HomeCustomText extends StatelessWidget {
         color: color ?? AppColor.primaryTextColor,
         fontSize: fontSize ?? 24,
         fontWeight: fontWeight ?? FontWeight.w600,
+        overflow: overflow ?? TextOverflow.ellipsis,
       ),
+      textAlign: textAlign ?? TextAlign.start,
     );
   }
 }
