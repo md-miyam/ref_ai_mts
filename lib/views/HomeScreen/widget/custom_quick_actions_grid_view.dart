@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ref_ai/utils/app_color.dart';
-import 'package:ref_ai/widget/my_custom_text.dart';
+import 'package:ref_ai/widget/custom_text.dart';
 
 class CustomQuickActionsGridView extends StatelessWidget {
   final String gridIconImage;
@@ -37,18 +37,22 @@ class CustomQuickActionsGridView extends StatelessWidget {
                 color: AppColor.myGreen,
               ),
               child: Center(
-                child: Image.asset(gridIconImage, color: Colors.white),
+                child: Image.asset(gridIconImage, color: Colors.white,height: 24,width: 24,),
               ),
             ),
             SizedBox(height: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                MyCustomText(text: gridFirstText, fontSize: 18),
-                MyCustomText(
+                CustomText(text: gridFirstText, fontSize: 18,overflow: TextOverflow.ellipsis,),
+                // SizedBox(
+                //   height: 4,
+                // ),
+                CustomText(
                   text: gridSecondText,
                   fontSize: 12,
                   fontWeight: FontWeight.w400,
+                  // overflow: TextOverflow.ellipsis,
                 ),
               ],
             )

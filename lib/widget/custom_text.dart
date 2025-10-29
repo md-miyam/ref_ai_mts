@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ref_ai/utils/app_color.dart';
 
-class MyCustomText extends StatelessWidget {
+class CustomText extends StatelessWidget {
   final String text;
   final Color? color;
   final double? fontSize;
@@ -9,12 +9,14 @@ class MyCustomText extends StatelessWidget {
   final TextOverflow? overflow;
   final TextAlign? textAlign;
 
-  const MyCustomText({
+  const CustomText({
     super.key,
     required this.text,
     this.color,
     this.fontSize,
-    this.fontWeight, this.overflow, this.textAlign,
+    this.fontWeight,
+    this.overflow,
+    this.textAlign,
   });
 
   @override
@@ -25,7 +27,7 @@ class MyCustomText extends StatelessWidget {
         color: color ?? AppColor.primaryTextColor,
         fontSize: fontSize ?? 24,
         fontWeight: fontWeight ?? FontWeight.w600,
-        overflow: overflow ?? TextOverflow.ellipsis,
+        overflow: overflow ?? TextOverflow.fade,
       ),
       textAlign: textAlign ?? TextAlign.start,
     );

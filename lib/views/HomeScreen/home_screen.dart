@@ -4,7 +4,7 @@ import 'package:ref_ai/views/HomeScreen/widget/aI_services_card.dart';
 import 'package:ref_ai/views/HomeScreen/widget/custom_quick_actions_grid_view.dart';
 import 'package:ref_ai/widget/custom_button.dart';
 import 'package:ref_ai/widget/custom_text_field.dart';
-import 'package:ref_ai/widget/my_custom_text.dart';
+import 'package:ref_ai/widget/custom_text.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -54,112 +54,83 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: 151,
                     margin: 32,
                   ),
-                  MyCustomText(text: 'Quick Actions'),
+                  CustomText(text: 'Quick Actions'),
 
                   // my grid
-                  SizedBox(
-                    // margin: EdgeInsets.symmetric(vertical: 0),
-                    height: MediaQuery.of(context).size.height * 0.5,
-                    child: GridView.builder(
-                      itemCount: 4,
-                      physics: NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
-                            childAspectRatio: 1, // Optional: width/height ratio
-                          ),
-                      itemBuilder: (context, index) {
-                        return CustomQuickActionsGridView(
-                          gridIconImage: gridIconImageList[index],
-                          gridFirstText: gridFirstTextList[index],
-                          gridSecondText: gridSecondTextList[index],
-                        );
-                      },
-                    ),
+                  GridView.builder(
+                    itemCount: 4,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12,
+                          childAspectRatio: 1, // Optional: width/height ratio
+                        ),
+                    itemBuilder: (context, index) {
+                      return CustomQuickActionsGridView(
+                        gridIconImage: gridIconImageList[index],
+                        gridFirstText: gridFirstTextList[index],
+                        gridSecondText: gridSecondTextList[index],
+                      );
+                    },
                   ),
 
-                  // Column(
-                  //   children: [
-                  //
-                  //     Row(
-                  //       children: [
-                  //         CustomQuickActionsGridView(
-                  //           gridIconImage: gridIconImageList[0],
-                  //           gridFirstText: gridFirstTextList[0],
-                  //           gridSecondText: gridSecondTextList[0],
-                  //         ),
-                  //         SizedBox(
-                  //           width: 12,
-                  //         ),
-                  //         CustomQuickActionsGridView(
-                  //           gridIconImage: gridIconImageList[0],
-                  //           gridFirstText: gridFirstTextList[0],
-                  //           gridSecondText: gridSecondTextList[0],
-                  //         ),
-                  //       ],
-                  //     ),
-                  //
-                  //     SizedBox(
-                  //       height: 12,
-                  //     ),
-                  //     Row(
-                  //       children: [
-                  //         CustomQuickActionsGridView(
-                  //           gridIconImage: gridIconImageList[0],
-                  //           gridFirstText: gridFirstTextList[0],
-                  //           gridSecondText: gridSecondTextList[0],
-                  //         ),
-                  //         SizedBox(
-                  //           width: 12,
-                  //         ),
-                  //         CustomQuickActionsGridView(
-                  //           gridIconImage: gridIconImageList[0],
-                  //           gridFirstText: gridFirstTextList[0],
-                  //           gridSecondText: gridSecondTextList[0],
-                  //         ),
-                  //       ],
-                  //     ),
-                  //
-                  //   ],
-                  // ),
-                  MyCustomText(text: 'New Opportunities Found'),
+                  SizedBox(height: 32),
 
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Container(
-                      height: 120,
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF1A1A1A),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
+                  CustomText(text: 'New Opportunities Found'),
+
+                  ListView.builder(
+                    itemCount: 3,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.only(bottom: 12),
+                        child: Container(
+                          height: 120,
+                          width: double.infinity,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 20,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF1A1A1A),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                              Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      Icon(
-                                        Icons.schedule,
-                                        color: Color(0xFF00c27a),
+                                      Row(
+                                        children: [
+                                          Icon(
+                                            Icons.schedule,
+                                            color: Color(0xFF00c27a),
+                                          ),
+                                          SizedBox(width: 6),
+                                          Text(
+                                            'Bank Overdraft Fees',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w500,
+                                              color: AppColor.primaryTextColor,
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      SizedBox(width: 6),
                                       Text(
-                                        'Bank Overdraft Fees',
+                                        '\$127.50',
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w500,
@@ -168,189 +139,73 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ],
                                   ),
-                                  Text(
-                                    '\$127.50',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColor.primaryTextColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(height: 2),
+                                  SizedBox(height: 2),
 
-                              Row(
-                                children: [
-                                  SizedBox(width: 30),
-                                  Text(
-                                    'Class action',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      color: AppColor.primaryTextColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                height: 23,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF59E0B),
-                                  borderRadius: BorderRadius.circular(39),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'PROCESSING',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColor.primaryTextColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                'View status',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF00c27a),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 6),
-                    child: Container(
-                      height: 120,
-                      width: double.infinity,
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 20,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF1A1A1A),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
                                   Row(
                                     children: [
-                                      Icon(
-                                        Icons.schedule,
-                                        color: Color(0xFF00c27a),
-                                      ),
-                                      SizedBox(width: 6),
+                                      SizedBox(width: 30),
                                       Text(
-                                        'Bank Overdraft Fees',
+                                        'Class action',
                                         style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.normal,
                                           color: AppColor.primaryTextColor,
                                         ),
                                       ),
                                     ],
                                   ),
-                                  Text(
-                                    '\$127.50',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: AppColor.primaryTextColor,
-                                    ),
-                                  ),
                                 ],
                               ),
-                              SizedBox(height: 2),
 
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
-                                  SizedBox(width: 30),
+                                  Container(
+                                    height: 23,
+                                    padding: EdgeInsets.symmetric(
+                                      vertical: 4,
+                                      horizontal: 8,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Color(0xFFF59E0B),
+                                      borderRadius: BorderRadius.circular(39),
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'PROCESSING',
+                                        style: TextStyle(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppColor.primaryTextColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                   Text(
-                                    'Class action',
+                                    'View status',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      fontWeight: FontWeight.normal,
-                                      color: AppColor.primaryTextColor,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xFF00c27a),
                                     ),
                                   ),
                                 ],
                               ),
                             ],
                           ),
-
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Container(
-                                height: 23,
-                                padding: EdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Color(0xFFF59E0B),
-                                  borderRadius: BorderRadius.circular(39),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    'PROCESSING',
-                                    style: TextStyle(
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColor.primaryTextColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                'View status',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                  color: Color(0xFF00c27a),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      MyCustomText(text: 'Refund Categories'),
-                      MyCustomText(
+                      CustomText(text: 'Refund Categories'),
+                      CustomText(
                         text: 'See all',
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
@@ -361,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                   // listview
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 24),
+                    padding: const EdgeInsets.only(top: 24),
                     child: SizedBox(
                       height: 121,
                       width: double.infinity,
@@ -391,7 +246,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       decoration: BoxDecoration(
                                         image: DecorationImage(
                                           image: AssetImage(
-                                            'assets/images/utilities.png',
+                                            'assets/images/insurance.png',
                                           ),
                                           // fit: BoxFit.cover
                                         ),
@@ -399,11 +254,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
 
                                     SizedBox(height: 6),
-                                    MyCustomText(
+                                    CustomText(
                                       text: 'Auto Insurance',
                                       fontSize: 14,
                                     ),
-                                    MyCustomText(
+                                    CustomText(
                                       text: '3 Found',
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,

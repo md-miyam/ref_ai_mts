@@ -14,59 +14,77 @@ class BottomNev extends StatefulWidget {
 }
 
 class _BottomNevState extends State<BottomNev> {
-  static Color? selectedItemColor = AppColor.bottomNevSelectedItemColor;
-  int _newIndex = 0;
+  int _selectedIndex = 0;
 
-  List <Widget> screenList = [HomeScreen(),ScanScreen(),CategoriesScreen(),TrackerScreen(),ProfileScreen()];
+  final List<Widget> _screens = [
+    HomeScreen(),
+    ScanScreen(),
+    CategoriesScreen(),
+    TrackerScreen(),
+    ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: screenList[_newIndex],
+      body: IndexedStack(index: _selectedIndex, children: _screens),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: AppColor.bottomNevColor,
         type: BottomNavigationBarType.fixed,
-        selectedItemColor: selectedItemColor,
+        selectedItemColor: AppColor.bottomNevSelectedItemColor,
         unselectedItemColor: Colors.white,
-        currentIndex: _newIndex,
-        onTap: (v) {
+        currentIndex: _selectedIndex,
+        onTap: (index) {
           setState(() {
-            _newIndex = v;
+            _selectedIndex = index;
           });
         },
+        selectedLabelStyle: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontSize: 11,
+          fontWeight: FontWeight.w500,
+        ),
         items: [
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/images/home.png',
-              color: _newIndex == 0 ? Color(0xFF00C27A) : Colors.white,
+              color: _selectedIndex == 0 ? Color(0xFF00C27A) : Colors.white,
+              height: 24,
             ),
             label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/images/scan.png',
-              color: _newIndex == 1 ? Color(0xFF00C27A) : Colors.white,
+              color: _selectedIndex == 1 ? Color(0xFF00C27A) : Colors.white,
+              height: 25,
             ),
             label: 'Scan',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/images/categories.png',
-              color: _newIndex == 2 ? Color(0xFF00C27A) : Colors.white,
+              color: _selectedIndex == 2 ? Color(0xFF00C27A) : Colors.white,
+              height: 24,
             ),
             label: 'Categories',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/images/tracker.png',
-              color: _newIndex == 3 ? Color(0xFF00C27A) : Colors.white,
+              color: _selectedIndex == 3 ? Color(0xFF00C27A) : Colors.white,
+              height: 22,
             ),
             label: 'Tracker',
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'assets/images/profile.png',
-              color: _newIndex == 4 ? Color(0xFF00C27A) : Colors.white,
+              color: _selectedIndex == 4 ? Color(0xFF00C27A) : Colors.white,
+              height: 24,
             ),
             label: 'Profile',
           ),

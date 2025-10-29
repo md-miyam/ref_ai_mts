@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:ref_ai/utils/app_color.dart';
+import 'package:ref_ai/views/SplashScreen/third_splash_screen.dart';
 import 'package:ref_ai/views/SplashScreen/widget/custom_rich_text.dart';
-import 'package:ref_ai/views/SplashScreen/widget/my_splash_button.dart';
-import 'package:ref_ai/views/SplashScreen/widget/splash_container.dart';
-import 'package:ref_ai/widget/my_custom_text.dart';
+import 'package:ref_ai/views/SplashScreen/widget/page_indicator.dart';
+import 'package:ref_ai/widget/custom_text.dart';
+import 'package:ref_ai/widget/dual_button.dart';
 
 class SecondSplashScreen extends StatefulWidget {
   const SecondSplashScreen({super.key});
@@ -20,39 +22,45 @@ class _SecondSplashScreenState extends State<SecondSplashScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            SizedBox(height: 10),
-            Center(
-              child: Container(
-                height: 293,
-                width: 293,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/images/second_splash.png'),
+            // Image
+            Padding(
+              padding: const EdgeInsets.only(top: 10, bottom: 12),
+              child: Center(
+                child: Container(
+                  // height: 293,
+                  // width: 293,
+                  height: MediaQuery.of(context).size.height * .30,
+
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/second_splash.png'),
+                    ),
                   ),
                 ),
               ),
             ),
-
+            // Automated text
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: MyCustomText(
+              child: CustomText(
                 text: "Automated & Effortless Recovery",
-                overflow: TextOverflow.fade,
                 fontSize: 32,
                 textAlign: TextAlign.center,
               ),
             ),
 
-            SizedBox(height: 12),
-
-            MyCustomText(
-              text: 'We make finding your money simple. Here’s how:',
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              textAlign: TextAlign.center,
+            // We make text
+            Padding(
+              padding: const EdgeInsets.only(top: 12, bottom: 40),
+              child: CustomText(
+                text: 'We make finding your money simple. Here’s how:',
+                fontSize: 12,
+                fontWeight: FontWeight.w400,
+                textAlign: TextAlign.center,
+              ),
             ),
-            SizedBox(height: 20),
 
+            // RichText's
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
@@ -64,7 +72,7 @@ class _SecondSplashScreenState extends State<SecondSplashScreen> {
                   ),
 
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                     child: CustomRichText(
                       firstText: 'AI-Powered Scan: ',
                       secondText:
@@ -83,29 +91,32 @@ class _SecondSplashScreenState extends State<SecondSplashScreen> {
 
             SizedBox(height: 24),
 
+            // PageIndicator
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SplashContainer(isBorder: true),
-                SplashContainer(),
-                SplashContainer(isBorder: true),
+                PageIndicator(isBorder: true),
+                PageIndicator(),
+                PageIndicator(isBorder: true),
               ],
             ),
 
             Spacer(),
 
-            MySplashButton(
+            // Button's
+            DualButton(
               buttonChild: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(Icons.arrow_forward, color: AppColor.myWhite),
               ),
-              isBack: true,
+              isBackButton: true,
+              onTap: () {
+                Get.to(
+                  ThirdSplashScreen(),
+                  transition: Transition.rightToLeftWithFade,
+                );
+              },
             ),
-
-            // MySplashButton(buttonChild: Padding(
-            //   padding: const EdgeInsets.symmetric(horizontal: 52.5),
-            //   child: Text('Get started',style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: AppColor.myWhite),),
-            // ), isBack: true,),
           ],
         ),
       ),
