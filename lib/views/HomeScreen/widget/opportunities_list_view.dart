@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ref_ai/utils/app_color.dart';
 
-class NewOpportunitiesListView extends StatelessWidget {
+class OpportunitiesListView extends StatelessWidget {
   final String title;
   final String subTitle;
   final IconData leadingIcon;
@@ -10,7 +10,7 @@ class NewOpportunitiesListView extends StatelessWidget {
   final String buttonText;
   final Color? buttonColor;
 
-  const NewOpportunitiesListView({
+  const OpportunitiesListView({
     super.key,
     required this.title,
     required this.trailingText,
@@ -37,12 +37,12 @@ class NewOpportunitiesListView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Top Row: Icon + Title + Amount
+            // Top Row: Icon + Title + Amount
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                /// Icon + Title
+                // Icon + Title
                 Expanded(
                   child: Row(
                     children: [
@@ -64,7 +64,7 @@ class NewOpportunitiesListView extends StatelessWidget {
                   ),
                 ),
 
-                /// Amount
+                // Amount
                 Text(
                   trailingText,
                   style: TextStyle(
@@ -79,7 +79,7 @@ class NewOpportunitiesListView extends StatelessWidget {
 
             const SizedBox(height: 2),
 
-            /// Subtitle
+            // Subtitle
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: Text(
@@ -95,7 +95,7 @@ class NewOpportunitiesListView extends StatelessWidget {
 
             const SizedBox(height: 13),
 
-            /// Bottom Row: Button + Claimed Text
+            // Bottom Row: Button + Claimed Text
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
@@ -129,7 +129,7 @@ class NewOpportunitiesListView extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
-                      color: Color(0xFF00c27a),
+                      color: AppColor.secondaryColor,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

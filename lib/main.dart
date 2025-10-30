@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: BottomNev(),
       home: FirstSplashScreen(),
+      // initialRoute: RouteName.splashScreen,
+      // getPages: AppRoutes.appRoutes(),
     );
   }
 }

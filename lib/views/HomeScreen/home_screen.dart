@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:ref_ai/utils/app_color.dart';
-import 'package:ref_ai/views/HomeScreen/widget/aI_services_card.dart';
+import 'package:ref_ai/views/HomeScreen/widget/ai_services_card.dart';
 import 'package:ref_ai/views/HomeScreen/widget/custom_quick_actions_grid_view.dart';
-import 'package:ref_ai/views/HomeScreen/widget/new_opportunities_list_view.dart';
+import 'package:ref_ai/views/HomeScreen/widget/opportunities_list_view.dart';
 import 'package:ref_ai/views/HomeScreen/widget/refund_categories_list_view.dart';
+import 'package:ref_ai/views/MoneyRecoveryResultsScreen/money_recovery_results_screen.dart';
 import 'package:ref_ai/widget/custom_button.dart';
 import 'package:ref_ai/widget/custom_text.dart';
 
@@ -106,10 +108,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 AiServicesCard(),
 
                 // Track your Claim refunds button
-                CustomButton(
-                  childText: 'Track your Claim refunds',
-                  borderRadius: 151,
-                  margin: 32,
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32),
+                  child: CustomButton(
+                    childText: 'Track your Claim refunds',
+                    onTap: () {
+                      Get.to(
+                        MoneyRecoveryResultsScreen(),
+                        transition: Transition.cupertinoDialog,
+                      );
+                    },
+                  ),
                 ),
 
                 // Quick Actions text
@@ -154,7 +163,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       final item = opportunitiesList[index];
-                      return NewOpportunitiesListView(
+                      return OpportunitiesListView(
                         title: item['title'],
                         subTitle: item['subTitle'],
                         leadingIcon: item['leadingIcon'],

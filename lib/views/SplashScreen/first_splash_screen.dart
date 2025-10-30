@@ -80,6 +80,7 @@ class _FirstSplashScreenState extends State<FirstSplashScreen> {
             Spacer(),
             // Button
             DualButton(
+              buttonHeight: 40,
               buttonChild: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(Icons.arrow_forward, color: AppColor.myWhite),

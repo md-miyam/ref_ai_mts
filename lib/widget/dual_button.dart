@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ref_ai/utils/app_color.dart';
 
-class DualButton extends StatefulWidget {
+class DualButton extends StatelessWidget {
   final bool isBackButton;
+  final double? buttonHeight;
   final Widget buttonChild;
   final void Function()? onTap;
 
@@ -12,13 +13,9 @@ class DualButton extends StatefulWidget {
     this.isBackButton = false,
     required this.buttonChild,
     this.onTap,
+    this.buttonHeight,
   });
 
-  @override
-  State<DualButton> createState() => _DualButtonState();
-}
-
-class _DualButtonState extends State<DualButton> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -27,9 +24,11 @@ class _DualButtonState extends State<DualButton> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          widget.isBackButton
+          isBackButton
               ? ClipRRect(
-                  borderRadius: BorderRadius.circular(8), // ripple shape control
+                  borderRadius: BorderRadius.circular(
+                    8,
+                  ), // ripple shape control
                   child: Material(
                     color: Colors.transparent, // no background
                     child: InkWell(
@@ -68,16 +67,18 @@ class _DualButtonState extends State<DualButton> {
             child: Material(
               color: AppColor.myGreen, // ripple visible with background
               child: InkWell(
-                onTap: widget.onTap,
-                splashColor: Colors.white38,
+                onTap: onTap,
+                splashColor: Colors.white12,
                 highlightColor: Colors.white10,
                 child: SizedBox(
-                  height: 40,
-                  child: Center(child: widget.buttonChild),
+                  height: buttonHeight ?? 48,
+                  child: Center(child: buttonChild),
                 ),
               ),
             ),
           ),
+
+
         ],
       ),
     );
