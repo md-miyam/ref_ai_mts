@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ref_ai/utils/app_color.dart';
 import 'package:ref_ai/views/HomeScreen/widget/aI_services_card.dart';
 import 'package:ref_ai/views/HomeScreen/widget/custom_quick_actions_grid_view.dart';
+import 'package:ref_ai/views/HomeScreen/widget/new_opportunities_list_view.dart';
+import 'package:ref_ai/views/HomeScreen/widget/refund_categories_list_view.dart';
 import 'package:ref_ai/widget/custom_button.dart';
-import 'package:ref_ai/widget/custom_text_field.dart';
 import 'package:ref_ai/widget/custom_text.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -14,51 +16,111 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<String> gridIconImageList = [
-    'assets/images/connect_bank.png',
-    'assets/images/upload_healthcare_bills.png',
-    'assets/images/check_auto_insurance.png',
-    'assets/images/union.png',
+  final List<Map<String, String>> gridItemsList = [
+    {
+      'icon': 'assets/images/connect_bank.png',
+      'title': 'Connect Bank',
+      'subTitle': 'Link your accounts',
+    },
+    {
+      'icon': 'assets/images/upload_healthcare_bills.png',
+      'title': 'Upload healthcare Bills',
+      'subTitle': 'Find medical refunds',
+    },
+    {
+      'icon': 'assets/images/check_auto_insurance.png',
+      'title': 'Check Auto Insurance',
+      'subTitle': 'Review coverage',
+    },
+    {
+      'icon': 'assets/images/union.png',
+      'title': 'Scan Email Recepts',
+      'subTitle': 'Find medical refunds',
+    },
   ];
-  List<String> gridFirstTextList = [
-    'Connect Bank',
-    'Upload healthcare Bills',
-    'Check Auto Insurance',
-    'Scan Email Recepts',
+
+  final List<Map<String, dynamic>> opportunitiesList = [
+    {
+      'title': 'Bank Overdraft Fees',
+      'subTitle': 'Junk fees',
+      'leadingIcon': Icons.watch_later_outlined,
+      'trailing': {'text': '\$127.50', 'subText': 'Claimed'},
+      'button': {'text': 'ELIGIBLE', 'color': AppColor.myGreen},
+    },
+    {
+      'title': 'Uber class action settlement',
+      'subTitle': 'Class action',
+      'leadingIcon': Icons.watch_later_outlined,
+      'trailing': {'text': '\$127.50', 'subText': 'View status'},
+      'button': {'text': 'PROCESSING', 'color': Color(0xFFf59e0b)},
+    },
+    {
+      'title': 'Healthcare Overpayment',
+      'subTitle': 'Class action',
+      'leadingIcon': Icons.watch_later_outlined,
+      'trailing': {'text': '\$89.25', 'subText': 'Claimed'},
+      'button': {'text': 'PAID', 'color': Color(0xFF666666)},
+    },
+    {
+      'title': 'Healthcare Overpayment',
+      'subTitle': 'Class action',
+      'leadingIcon': Icons.watch_later_outlined,
+      'trailing': {'text': '\$89.25', 'subText': 'Claimed'},
+      'button': {'text': 'PAID', 'color': Color(0xFF666666)},
+    },
   ];
-  List<String> gridSecondTextList = [
-    'Link your accounts',
-    'Find medical refunds',
-    'Review coverage',
-    'Find medical refunds',
+
+  final List<Map<String, String>> refundCategoriesLis = [
+    {
+      'image': 'assets/images/insurance.png',
+      'title': 'Auto Insurance',
+      'subTitle': '3 Found',
+    },
+    {
+      'image': 'assets/images/utilities.png',
+      'title': 'Utilities',
+      'subTitle': '2 Found',
+    },
+    {
+      'image': 'assets/images/healthcare.png',
+      'title': 'Healthcare',
+      'subTitle': '4 Found',
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
     return Scaffold(
       backgroundColor: AppColor.backgroundColor,
 
-      body: Container(
-        margin: EdgeInsets.only(top: 25),
-        child: Expanded(
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  AiServicesCard(),
-                  CustomButton(
-                    childText: 'Track your Claim refunds',
-                    borderRadius: 151,
-                    margin: 32,
-                  ),
-                  CustomText(text: 'Quick Actions'),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // AiServicesCard
+                AiServicesCard(),
 
-                  // my grid
-                  GridView.builder(
-                    itemCount: 4,
+                // Track your Claim refunds button
+                CustomButton(
+                  childText: 'Track your Claim refunds',
+                  borderRadius: 151,
+                  margin: 32,
+                ),
+
+                // Quick Actions text
+                CustomText(text: 'Quick Actions'),
+
+                // Home GridView
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, bottom: 32),
+                  child: GridView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: gridItemsList.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     gridDelegate:
@@ -69,222 +131,85 @@ class _HomeScreenState extends State<HomeScreen> {
                           childAspectRatio: 1, // Optional: width/height ratio
                         ),
                     itemBuilder: (context, index) {
+                      final item = gridItemsList[index];
                       return CustomQuickActionsGridView(
-                        gridIconImage: gridIconImageList[index],
-                        gridFirstText: gridFirstTextList[index],
-                        gridSecondText: gridSecondTextList[index],
+                        gridIconImage: item['icon'].toString(),
+                        gridFirstText: item['title'].toString(),
+                        gridSecondText: item['subTitle'].toString(),
                       );
                     },
                   ),
+                ),
 
-                  SizedBox(height: 32),
+                // New Opportunities Found text
+                CustomText(text: 'New Opportunities Found'),
 
-                  CustomText(text: 'New Opportunities Found'),
-
-                  ListView.builder(
-                    itemCount: 3,
+                // Home ListView
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, bottom: 20),
+                  child: ListView.builder(
+                    padding: EdgeInsets.zero,
+                    itemCount: opportunitiesList.length,
                     shrinkWrap: true,
                     physics: NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12),
-                        child: Container(
-                          height: 120,
-                          width: double.infinity,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12,
-                            vertical: 20,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF1A1A1A),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Icon(
-                                            Icons.schedule,
-                                            color: Color(0xFF00c27a),
-                                          ),
-                                          SizedBox(width: 6),
-                                          Text(
-                                            'Bank Overdraft Fees',
-                                            style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w500,
-                                              color: AppColor.primaryTextColor,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        '\$127.50',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                          color: AppColor.primaryTextColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 2),
-
-                                  Row(
-                                    children: [
-                                      SizedBox(width: 30),
-                                      Text(
-                                        'Class action',
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.normal,
-                                          color: AppColor.primaryTextColor,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    height: 23,
-                                    padding: EdgeInsets.symmetric(
-                                      vertical: 4,
-                                      horizontal: 8,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xFFF59E0B),
-                                      borderRadius: BorderRadius.circular(39),
-                                    ),
-                                    child: Center(
-                                      child: Text(
-                                        'PROCESSING',
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppColor.primaryTextColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    'View status',
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                      color: Color(0xFF00c27a),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
+                      final item = opportunitiesList[index];
+                      return NewOpportunitiesListView(
+                        title: item['title'],
+                        subTitle: item['subTitle'],
+                        leadingIcon: item['leadingIcon'],
+                        trailingText: item['trailing']['text'],
+                        trailingSubText: item['trailing']['subText'],
+                        buttonText: item['button']['text'],
+                        buttonColor:
+                            item['button']['color'], // Uncomment if supported
                       );
                     },
                   ),
+                ),
 
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      CustomText(text: 'Refund Categories'),
-                      CustomText(
-                        text: 'See all',
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                        color: AppColor.secondaryTextColor,
-                      ),
-                    ],
-                  ),
+                // Refund Categories + See all text
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CustomText(text: 'Refund Categories'),
+                    Row(
+                      children: [
+                        CustomText(
+                          text: 'See all',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                          color: AppColor.secondaryTextColor,
+                        ),
+                        SizedBox(width: 6),
+                      ],
+                    ),
+                  ],
+                ),
 
-                  // listview
-                  Padding(
-                    padding: const EdgeInsets.only(top: 24),
-                    child: SizedBox(
-                      height: 121,
-                      width: double.infinity,
-                      child: ListView.builder(
-                        itemCount: 3,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(right: 8),
-                            child: Container(
-                              width: 128,
-                              // margin: EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: Color(0xFF1a1a1a),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Color(0xFF484848)),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 12,
-                                ),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 48,
-                                      width: 48,
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage(
-                                            'assets/images/insurance.png',
-                                          ),
-                                          // fit: BoxFit.cover
-                                        ),
-                                      ),
-                                    ),
-
-                                    SizedBox(height: 6),
-                                    CustomText(
-                                      text: 'Auto Insurance',
-                                      fontSize: 14,
-                                    ),
-                                    CustomText(
-                                      text: '3 Found',
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                // Refund Categories listview
+                Padding(
+                  padding: const EdgeInsets.only(top: 12, bottom: 24),
+                  child: SizedBox(
+                    height: 121,
+                    width: double.infinity,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: refundCategoriesLis.length,
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        final item = refundCategoriesLis[index];
+                        return RefundCategoriesListView(
+                          image: item['image'].toString(),
+                          title: item['title'].toString(),
+                          subTitle: item['subTitle'].toString(),
+                        );
+                      },
                     ),
                   ),
-
-                  CustomTextField(
-                    hintText: 'Search your claim',
-                    verticalPadding: 20,
-                    suffixIcon: Icons.search,
-                    showSuffixIcon: true,
-                  ),
-                  CustomTextField(
-                    hintText: 'Text input',
-                    suffixIcon: Icons.visibility_off_outlined,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),
